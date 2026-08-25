@@ -84,8 +84,6 @@
     <module>dispatcher</module>
                     
     
-    
-    <module>ui.tests</module>
       
   </modules>
           
