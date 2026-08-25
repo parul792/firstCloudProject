@@ -43,7 +43,9 @@
                         </goals>
                         <configuration>
                             <bnd><![CDATA[
-Import-Package: javax.annotation;version=0.0.0,com.day.cq.wcm.api;version="[1.33,3)",*
+Import-Package: javax.annotation;version=0.0.0,\
+ software.amazon.awssdk.*;version=0.0.0,\
+ *
                                 ]]></bnd>
                         </configuration>
                     </execution>
