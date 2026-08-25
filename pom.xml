@@ -85,7 +85,6 @@
                     
     
     
-    <module>ui.tests</module>
       
   </modules>
           
@@ -94,7 +93,7 @@
   <properties>
                     
     
-    
+   
     <aem.host>localhost</aem.host>
                     
     
@@ -2239,6 +2238,18 @@ Bundle-DocURL:
                                     
       
       
+      </dependency>
+
+      <!-- AWS SDK v2 - S3 (POC: CF to S3 export) -->
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>s3</artifactId>
+        <version>2.26.12</version>
+      </dependency>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>apache-client</artifactId>
+        <version>2.26.12</version>
       </dependency>
                           
     

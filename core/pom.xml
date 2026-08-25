@@ -43,7 +43,9 @@
                         </goals>
                         <configuration>
                             <bnd><![CDATA[
-Import-Package: javax.annotation;version=0.0.0,*
+Import-Package: javax.annotation;version=0.0.0,\
+ software.amazon.awssdk.*;version=0.0.0,\
+ *
                                 ]]></bnd>
                         </configuration>
                     </execution>
@@ -81,6 +83,17 @@ Import-Package: javax.annotation;version=0.0.0,*
     </build>
 
     <dependencies>
+
+        <!-- AWS SDK v2 runtime dependencies (embedded via all package) -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>apache-client</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>uk.org.lidalia</groupId>
             <artifactId>slf4j-test</artifactId>

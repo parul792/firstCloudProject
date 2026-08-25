@@ -21,15 +21,12 @@ import javax.annotation.PostConstruct;
 
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
-import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
-
-import com.day.cq.wcm.api.Page;
-import com.day.cq.wcm.api.PageManager;
 
 import java.util.Optional;
 
@@ -49,14 +46,31 @@ public class HelloWorldModel {
 
     @PostConstruct
     protected void init() {
-        PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
-        String currentPagePath = Optional.ofNullable(pageManager)
-                .map(pm -> pm.getContainingPage(currentResource))
-                .map(Page::getPath).orElse("");
+        // Walk up the resource tree to find the containing cq:Page node.
+        // Uses only Sling APIs (no com.day.cq.wcm.api) so the bundle stays
+        // within the AEM Cloud allowed API region at start level 20.
+        String currentPagePath = Optional.ofNullable(findContainingPagePath(currentResource))
+                .orElse("");
 
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
             + "Current page is:  " + currentPagePath + "\n";
+    }
+
+    /**
+     * Walks up the Sling resource tree until a node with jcr:primaryType=cq:Page
+     * is found, then returns its path. Returns null if none is found.
+     */
+    private String findContainingPagePath(Resource resource) {
+        Resource current = resource;
+        while (current != null && !current.getPath().equals("/")) {
+            ValueMap props = current.getValueMap();
+            if ("cq:Page".equals(props.get("jcr:primaryType", String.class))) {
+                return current.getPath();
+            }
+            current = current.getParent();
+        }
+        return null;
     }
 
     public String getMessage() {
