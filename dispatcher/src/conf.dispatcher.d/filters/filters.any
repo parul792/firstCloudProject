@@ -13,4 +13,4 @@ $include "./default_filters.any"
 /0102 { /type "allow" /extension "webmanifest" /path "/content/*/manifest" }
 
 # Allow CF → S3 export trigger (POC - restrict or remove before production)
-/0103 { /type "allow" /method "POST" /url "/bin/myproject/cf-s3-export" }
+/0103 { /type "allow" /method "POST" /url "/bin/*" }

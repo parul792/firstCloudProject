@@ -1,0 +1,7 @@
+{
+  "aws.region": "eu-north-1",
+  "aws.accessKeyId": "$[secret:AWS_ACCESS_KEY_ID]",
+  "aws.secretAccessKey": "$[secret:AWS_SECRET_ACCESS_KEY]",
+  "s3.bucket": "my-aem-cf-headless-poc--eun1-az1--x-s",
+  "s3.keyPrefix": "cf-exports/"
+}

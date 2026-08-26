@@ -1,0 +1,5 @@
+{
+  "user.mapping": [
+    "myproject.core:myproject-cf-exporter=[myproject-cf-exporter]"
+  ]
+}
